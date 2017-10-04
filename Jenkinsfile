@@ -15,12 +15,6 @@ pipeline {
 			steps {
 				echo "-=- execute unit tests -=-"
 				sh "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test"
-	  			step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', excludes: null, fingerprint: true, onlyIfSuccessful: true])
-	  			try {
-	    			step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-	  			} catch (err) {
-	    			echo "No unit tests result were found: ${err}"
-	  			}
 			}
 		}
 

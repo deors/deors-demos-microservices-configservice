@@ -14,14 +14,14 @@ pipeline {
 		stage('Unit tests') {
 			steps {
 				echo "-=- execute unit tests -=-"
-				sh "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test"
+				sh "mvn org.jacoco:jacoco-maven-plugin:prepare-agent test"
 			}
 		}
 
 		stage('Build Docker image') {
 			steps {
 				echo "-=- build Docker image -=-"
-				sh "mvn package docker:build -DpushImage"
+				sh "mvn docker:build -DpushImage"
 			}
 		}
 

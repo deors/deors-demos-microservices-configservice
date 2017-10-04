@@ -25,6 +25,13 @@ pipeline {
 			}
 		}
 
+		stage("Integration tests') {
+			steps {
+				echo "-=- execute integration tests -=-"
+				sh "mvn org.jacoco:jacoco-maven-plugin:prepare-agent-integration verify -Dsurefire.skip=true"
+			}
+		}
+
 		stage('Build Docker image') {
 			steps {
 				echo "-=- build Docker image -=-"

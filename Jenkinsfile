@@ -21,10 +21,10 @@ pipeline {
 		stage('Build Docker image') {
 			steps {
 				echo "-=- build Docker image -=-"
-				sh '''\
-					eval \$(docker-machine env --shell bash docker-swarm-manager-1)\
-				    env | grep DOCKER\
-				    mvn docker:build -DpushImage -DskipTests=true\
+				sh '''
+					eval \$(docker-machine env --shell bash docker-swarm-manager-1)
+				    env | grep DOCKER
+				    mvn docker:build -DpushImage -DskipTests=true
 				'''
 			}
 		}

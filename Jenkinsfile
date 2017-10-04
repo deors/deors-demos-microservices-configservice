@@ -21,7 +21,7 @@ pipeline {
 		stage('Build Docker image') {
 			steps {
 				echo "-=- build Docker image -=-"
-				sh "FOR /f \"tokens=*\" %%i IN ('docker-machine env --shell cmd docker-swarm-manager-1') DO %%i"
+				sh "FOR /f \\"tokens=*\\" %%i IN ('docker-machine env --shell cmd docker-swarm-manager-1') DO %%i"
 				sh "set | grep DOCKER"
 				sh "mvn docker:build -DpushImage -DskipTests=true"
 			}

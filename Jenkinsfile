@@ -21,7 +21,7 @@ pipeline {
 		stage('Build Docker image') {
 			steps {
 				echo "-=- build Docker image -=-"
-				sh "\java\tools\docker-env.bat docker-swarm-manager-1"
+				sh "/java/tools/docker-env.bat docker-swarm-manager-1"
 				sh "set | grep DOCKER"
 				sh "mvn docker:build -DpushImage -DskipTests=true"
 			}

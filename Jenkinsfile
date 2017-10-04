@@ -25,7 +25,7 @@ pipeline {
 			}
 		}
 
-		stage("Integration tests') {
+		stage('Integration tests') {
 			steps {
 				echo "-=- execute integration tests -=-"
 				sh "mvn org.jacoco:jacoco-maven-plugin:prepare-agent-integration verify -Dsurefire.skip=true"

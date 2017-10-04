@@ -18,6 +18,13 @@ pipeline {
 			}
 		}
 
+		stage('Code inspection') {
+			steps {
+				echo "-=- run code inspection -=-"
+				sh "mvn sonar:sonar"
+			}
+		}
+
 		stage('Build Docker image') {
 			steps {
 				echo "-=- build Docker image -=-"

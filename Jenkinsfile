@@ -21,7 +21,8 @@ pipeline {
 		stage('Build Docker image') {
 			steps {
 				echo "-=- build Docker image -=-"
-				sh "mvn docker:build -DpushImage"
+				sh "docker-env docker-swarm-manager-1"
+				sh "mvn docker:build -DpushImage -DskipTests=true"
 			}
 		}
 

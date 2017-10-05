@@ -47,7 +47,10 @@ pipeline {
 				echo "-=- deploy service to Docker Swarm -=-"
 				sh '''
 					eval \$(docker-machine env --shell bash docker-swarm-manager-1)
-				    docker run -p 8888:8888 --name config-service -t deors/deors.demos.microservices.configservice:latest
+				    echo \$(docker service inspect -f "{{.ID}}" config-service)
+				    docker service create -p 8888:8888 --name config-service --network microdemo-network deors/deors.demos.microservices.configservice:latest
+				    echo \$(docker service inspect -f "{{.ID}}" config-service)
+				    docker service update --container-label-add update_cause="CI-trigger" --update-delay 30s --image deors/deors.demos.microservices.configservice:latest config-service
 				'''
 			}
 		}

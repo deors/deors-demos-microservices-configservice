@@ -45,7 +45,10 @@ pipeline {
 		stage('Deploy to Docker') {
 			steps {
 				echo "-=- deploy service to Docker -=-"
-				sh "docker run -p 8888:8888 --name config-service -t deors/deors.demos.microservices.configservice:latest"
+				sh '''
+					eval \$(docker-machine env --shell bash docker-swarm-manager-1)
+				    docker run -p 8888:8888 --name config-service -t deors/deors.demos.microservices.configservice:latest
+				'''
 			}
 		}
 	}

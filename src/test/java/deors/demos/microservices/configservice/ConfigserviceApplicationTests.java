@@ -1,4 +1,4 @@
-package deors.demos.microservices;
+package deors.demos.microservices.configservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ApplicationTests {
+public class ConfigserviceApplicationTests {
 
 	@Test
 	public void contextLoads() {

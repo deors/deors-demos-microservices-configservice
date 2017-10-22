@@ -1,13 +1,13 @@
-package deors.demos.microservices;
+package deors.demos.microservices.configservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @org.springframework.cloud.config.server.EnableConfigServer
-public class Application {
+public class ConfigserviceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(ConfigserviceApplication.class, args);
 	}
 }

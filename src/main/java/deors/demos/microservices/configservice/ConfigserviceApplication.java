@@ -10,4 +10,8 @@ public class ConfigserviceApplication {
     public static void main(String[] args) {
         SpringApplication.run(ConfigserviceApplication.class, args);
     }
+
+    public boolean isAlive() {
+        return true;
+    }
 }

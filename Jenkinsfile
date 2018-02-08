@@ -14,21 +14,14 @@ pipeline {
         stage('Unit tests') {
             steps {
                 echo "-=- execute unit tests -=-"
-                sh "mvn org.jacoco:jacoco-maven-plugin:prepare-agent test"
+                sh "mvn test"
             }
         }
 
-        stage('Code inspection') {
+        stage('Muration tests') {
             steps {
-                echo "-=- run code inspection -=-"
-                sh "mvn sonar:sonar"
-            }
-        }
-
-        stage('Integration tests') {
-            steps {
-                echo "-=- execute integration tests -=-"
-                sh "mvn org.jacoco:jacoco-maven-plugin:prepare-agent-integration verify -Dsurefire.skip=true"
+                echo "-=- execute mutation tests -=-"
+                sh "mvn org.pitest:pitest-maven:mutationCoverage"
             }
         }
 
@@ -49,6 +42,20 @@ pipeline {
                     eval \$(docker-machine env --shell bash docker-swarm-manager-1)
                     docker service update --container-label-add update_cause="CI-trigger" --update-delay 30s --image deors/deors.demos.microservices.configservice:latest config-service
                 '''
+            }
+        }
+
+        stage('Integration tests') {
+            steps {
+                echo "-=- execute integration tests -=-"
+                sh "mvn integration-test -Dtest.targetUrl=config-service"
+            }
+        }
+
+        stage('Code inspection') {
+            steps {
+                echo "-=- run code inspection -=-"
+                sh "mvn sonar:sonar"
             }
         }
     }

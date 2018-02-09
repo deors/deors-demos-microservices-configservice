@@ -65,6 +65,7 @@ pipeline {
             steps {
                 echo "-=- run dependency vulnerability tests -=-"
                 sh "mvn dependency-check:check"
+            }
         }
 
         stage('Code inspection & quality gate') {

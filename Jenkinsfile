@@ -4,10 +4,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Compile & package') {
+        stage('Compile') {
             steps {
-                echo "-=- building project -=-"
-                sh "mvn clean package -DskipTests=true"
+                echo "-=- compiling project -=-"
+                sh "mvn clean compile -DskipTests=true"
             }
         }
 
@@ -18,10 +18,17 @@ pipeline {
             }
         }
 
-        stage('Muration tests') {
+        stage('Mutation tests') {
             steps {
                 echo "-=- execute mutation tests -=-"
                 sh "mvn org.pitest:pitest-maven:mutationCoverage"
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo "-=- packaging project -=-"
+                sh "mvn package -DskipTests=true"
             }
         }
 
@@ -47,9 +54,9 @@ pipeline {
             }
         }
 
-        stage('Code inspection') {
+        stage('Code inspection & quality gate') {
             steps {
-                echo "-=- run code inspection -=-"
+                echo "-=- run code inspection & quality gate -=-"
                 sh "mvn sonar:sonar"
             }
         }

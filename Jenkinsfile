@@ -28,7 +28,7 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 echo "-=- build Docker image -=-"
-                sh "mvn docker:build -DpushImage -DskipTests=true"
+                sh "mvn docker:build -DskipTests=true"
             }
         }
 
@@ -50,6 +50,13 @@ pipeline {
             steps {
                 echo "-=- run code inspection -=-"
                 sh "mvn sonar:sonar"
+            }
+        }
+
+        stage('Push Docker image') {
+            steps {
+                echo "-=- push Docker image -=-"
+                sh "mvn docker:push -DskipTests=true"
             }
         }
     }

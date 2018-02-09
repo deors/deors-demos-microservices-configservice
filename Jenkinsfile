@@ -9,15 +9,11 @@ pipeline {
 
     agent any
 
-    environment {
-        JAVA_HOME = "${tool 'jdk-8'}"
-        PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
-    }
-
     stages {
         stage('Compile') {
             steps {
         sh "java -version"
+        sh "mvn --version"
         sh "echo ${env.JAVA_HOME}"
                 echo "-=- compiling project -=-"
                 sh "mvn clean compile"

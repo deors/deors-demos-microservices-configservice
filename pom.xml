@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>deors.demos.microservices.configservice</name>
+    <name>deors-demos-microservices-configservice</name>
     <description>Configuration service with Spring Cloud Config Server</description>
 
     <parent>

@@ -43,7 +43,7 @@ pipeline {
             steps {
                 echo "-=- deploy service to Docker Swarm -=-"
                 //sh "docker service create -p 8888:8888 --name configservice --network microdemonet deors/deors-demos-microservices-configservice:latest"
-                sh "docker service update --container-label-add update_cause="CI-trigger" --update-delay 30s --image deors/deors-demos-microservices-configservice:latest configservice"
+                sh "docker service update --container-label-add update_cause=\"CI-trigger\" --update-delay 30s --image deors/deors-demos-microservices-configservice:latest configservice"
             }
         }
 

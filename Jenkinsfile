@@ -1,10 +1,11 @@
 #!groovy​
 
 pipeline {
-    agent any
-
-    env.JAVA_HOME="${tool 'jdk-8'}"
-    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
+    agent {
+        docker {
+            image '3.5.2-jdk-8-alpine'
+        }
+    }
 
     stages {
         stage('Compile') {

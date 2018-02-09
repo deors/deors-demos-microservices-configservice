@@ -1,10 +1,17 @@
 #!groovy​
 
 pipeline {
-    agent {
+    /*agent {
         docker {
             image 'maven:3.5.2-jdk-8-alpine'
         }
+    }*/
+
+    agent any
+
+    environment {
+        env.JAVA_HOME="${tool 'jdk-8'}"
+        env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {

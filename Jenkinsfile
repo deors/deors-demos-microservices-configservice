@@ -28,20 +28,14 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 echo "-=- build Docker image -=-"
-                sh '''
-                    eval \$(docker-machine env --shell bash docker-swarm-manager-1)
-                    mvn docker:build -DpushImage -DskipTests=true
-                '''
+                sh "mvn docker:build -DpushImage -DskipTests=true"
             }
         }
 
         stage('Deploy to Docker') {
             steps {
                 echo "-=- deploy service to Docker Swarm -=-"
-                sh '''
-                    eval \$(docker-machine env --shell bash docker-swarm-manager-1)
-                    docker service update --container-label-add update_cause="CI-trigger" --update-delay 30s --image deors/deors.demos.microservices.configservice:latest config-service
-                '''
+                sh "docker service update --container-label-add update_cause="CI-trigger" --update-delay 30s --image deors/deors-demos-microservices-configservice:latest config-service"
             }
         }
 

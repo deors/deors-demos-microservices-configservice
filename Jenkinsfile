@@ -28,21 +28,22 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 echo "-=- build Docker image -=-"
-                sh "mvn docker:build -DskipTests=true"
+                sh "mvn docker:build"
             }
         }
 
         stage('Deploy to Docker') {
             steps {
                 echo "-=- deploy service to Docker Swarm -=-"
-                sh "docker service update --container-label-add update_cause="CI-trigger" --update-delay 30s --image deors/deors-demos-microservices-configservice:latest config-service"
+                #sh "docker service create -p 8888:8888 --name configservice --network microdemonet deors/deors-demos-microservices-configservice:latest"
+                sh "docker service update --container-label-add update_cause="CI-trigger" --update-delay 30s --image deors/deors-demos-microservices-configservice:latest configservice"
             }
         }
 
         stage('Integration tests') {
             steps {
                 echo "-=- execute integration tests -=-"
-                sh "mvn integration-test -Dtest.targetUrl=config-service"
+                sh "mvn integration-test -DskipTests=true -Dtest.targetUrl=http://127.0.0.1:8888"
             }
         }
 
@@ -56,7 +57,7 @@ pipeline {
         stage('Push Docker image') {
             steps {
                 echo "-=- push Docker image -=-"
-                sh "mvn docker:push -DskipTests=true"
+                sh "mvn docker:push"
             }
         }
     }

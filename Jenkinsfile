@@ -7,7 +7,7 @@ pipeline {
         stage('Compile') {
             steps {
                 echo "-=- compiling project -=-"
-                sh "mvn clean compile -DskipTests=true"
+                sh "mvn clean compile"
             }
         }
 
@@ -28,7 +28,7 @@ pipeline {
         stage('Package') {
             steps {
                 echo "-=- packaging project -=-"
-                sh "mvn package -DskipTests=true"
+                sh "mvn package -DskipUTs=true"
             }
         }
 
@@ -50,7 +50,7 @@ pipeline {
         stage('Integration tests') {
             steps {
                 echo "-=- execute integration tests -=-"
-                sh "mvn integration-test -DskipTests=true -Dtest.targetUrl=http://127.0.0.1:8888"
+                sh "mvn failsafe:integration-test failsafe:verify -Dtest.target.url=http://localhost:8888"
             }
         }
 

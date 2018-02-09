@@ -27,6 +27,7 @@
         <jacoco-listeners.version>5.1.0.13090</jacoco-listeners.version>
         <pitest.version>1.3.2</pitest.version>
         <jmeter.version>2.6.0</jmeter.version>
+        <dependency-check.version>3.1.1</dependency-check.version>
         <spotify-docker.version>1.0.0</spotify-docker.version>
         <docker.image.prefix>deors</docker.image.prefix>
         <jacoco.path>${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar</jacoco.path>
@@ -122,14 +123,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.lazerycode.jmeter</groupId>
-                <artifactId>jmeter-maven-plugin</artifactId>
-                <version>${jmeter.version}</version>
-                <configuration>
-                    <testResultsTimestamp>false</testResultsTimestamp>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>${pitest.version}</version>
@@ -141,6 +134,22 @@
                         <outputFormat>XML</outputFormat>
                     </outputFormats>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>${jmeter.version}</version>
+                <configuration>
+                    <testResultsTimestamp>false</testResultsTimestamp>
+                </configuration>
+            </plugin>
+            <plugin>
+              <groupId>org.owasp</groupId>
+              <artifactId>dependency-check-maven</artifactId>
+              <version>${dependency-check.version}</version>
+              <configuration>
+                  <failBuildOnCVSS>5</failBuildOnCVSS>
+              </configuration>
             </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>

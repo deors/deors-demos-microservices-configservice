@@ -12,9 +12,6 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-        sh "java -version"
-        sh "mvn --version"
-        sh "echo ${env.JAVA_HOME}"
                 echo "-=- compiling project -=-"
                 sh "mvn clean compile"
             }

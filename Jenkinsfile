@@ -12,13 +12,13 @@ pipeline {
     environment {
         JAVA_HOME = "${tool 'jdk-8'}"
         PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
-        sh "java -version"
-        sh "echo ${env.JAVA_HOME}"
     }
 
     stages {
         stage('Compile') {
             steps {
+        sh "java -version"
+        sh "echo ${env.JAVA_HOME}"
                 echo "-=- compiling project -=-"
                 sh "mvn clean compile"
             }

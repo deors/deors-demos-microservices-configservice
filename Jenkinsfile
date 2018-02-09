@@ -12,6 +12,8 @@ pipeline {
     environment {
         JAVA_HOME = "${tool 'jdk-8'}"
         PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
+        sh "java -version"
+        sh "echo ${env.JAVA_HOME}"
     }
 
     stages {

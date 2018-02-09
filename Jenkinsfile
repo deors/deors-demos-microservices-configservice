@@ -54,6 +54,13 @@ pipeline {
             }
         }
 
+        stage('Performance tests') {
+            steps {
+                echo "-=- execute performance tests -=-"
+                sh "mvn jmeter:jmeter jmeter:results"
+            }
+        }
+
         stage('Code inspection & quality gate') {
             steps {
                 echo "-=- run code inspection & quality gate -=-"
